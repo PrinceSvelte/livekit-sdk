@@ -12,37 +12,30 @@ var styles = {"video":"_2WNzJ","participant":"_34YL4","speaker":"_1y2fW","placeh
 
 var ControlButton = function ControlButton(_ref) {
   var label = _ref.label,
-      disabled = _ref.disabled,
-      _onClick = _ref.onClick,
-      icon = _ref.icon,
-      className = _ref.className,
-      menuItems = _ref.menuItems,
-      popoverContainerClassName = _ref.popoverContainerClassName,
-      popoverTriggerBtnClassName = _ref.popoverTriggerBtnClassName,
-      popoverTriggerBtnSeparatorClassName = _ref.popoverTriggerBtnSeparatorClassName,
-      onMenuItemClick = _ref.onMenuItemClick;
-
+    disabled = _ref.disabled,
+    _onClick = _ref.onClick,
+    icon = _ref.icon,
+    className = _ref.className,
+    menuItems = _ref.menuItems,
+    popoverContainerClassName = _ref.popoverContainerClassName,
+    popoverTriggerBtnClassName = _ref.popoverTriggerBtnClassName,
+    popoverTriggerBtnSeparatorClassName = _ref.popoverTriggerBtnSeparatorClassName,
+    onMenuItemClick = _ref.onMenuItemClick;
   var _useState = useState(false),
-      menuVisible = _useState[0],
-      setMenuVisible = _useState[1];
-
+    menuVisible = _useState[0],
+    setMenuVisible = _useState[1];
   var classes = styles.button;
-
   if (className) {
     classes += " " + className;
   }
-
   var handleMenuClick = function handleMenuClick(item) {
     setMenuVisible(false);
-
     if (onMenuItemClick) {
       onMenuItemClick(item);
     }
   };
-
   var menuTrigger;
   var menu = React__default.createElement("div", null);
-
   if (menuItems && menuItems.length > 0) {
     classes += " " + styles.hasDropdown;
     menuTrigger = React__default.createElement("button", {
@@ -70,7 +63,6 @@ var ControlButton = function ControlButton(_ref) {
       }, item.label);
     })));
   }
-
   var mainContent = React__default.createElement("button", {
     disabled: disabled,
     className: classes,
@@ -83,11 +75,9 @@ var ControlButton = function ControlButton(_ref) {
     height: 32,
     icon: icon
   }), label);
-
   if (!menuTrigger) {
     return mainContent;
   }
-
   return React__default.createElement(Popover, {
     isOpen: menuVisible,
     positions: ['top'],
@@ -99,28 +89,25 @@ var ControlButton = function ControlButton(_ref) {
 
 var AudioSelectButton = function AudioSelectButton(_ref) {
   var isMuted = _ref.isMuted,
-      onClick = _ref.onClick,
-      onSourceSelected = _ref.onSourceSelected,
-      isButtonDisabled = _ref.isButtonDisabled,
-      _ref$muteText = _ref.muteText,
-      muteText = _ref$muteText === void 0 ? 'Mute' : _ref$muteText,
-      _ref$unmuteText = _ref.unmuteText,
-      unmuteText = _ref$unmuteText === void 0 ? 'Unmute' : _ref$unmuteText,
-      _ref$requestPermissio = _ref.requestPermissions,
-      requestPermissions = _ref$requestPermissio === void 0 ? true : _ref$requestPermissio,
-      className = _ref.className,
-      popoverContainerClassName = _ref.popoverContainerClassName,
-      popoverTriggerBtnClassName = _ref.popoverTriggerBtnClassName,
-      popoverTriggerBtnSeparatorClassName = _ref.popoverTriggerBtnSeparatorClassName;
-
+    onClick = _ref.onClick,
+    onSourceSelected = _ref.onSourceSelected,
+    isButtonDisabled = _ref.isButtonDisabled,
+    _ref$muteText = _ref.muteText,
+    muteText = _ref$muteText === void 0 ? 'Mute' : _ref$muteText,
+    _ref$unmuteText = _ref.unmuteText,
+    unmuteText = _ref$unmuteText === void 0 ? 'Unmute' : _ref$unmuteText,
+    _ref$requestPermissio = _ref.requestPermissions,
+    requestPermissions = _ref$requestPermissio === void 0 ? true : _ref$requestPermissio,
+    className = _ref.className,
+    popoverContainerClassName = _ref.popoverContainerClassName,
+    popoverTriggerBtnClassName = _ref.popoverTriggerBtnClassName,
+    popoverTriggerBtnSeparatorClassName = _ref.popoverTriggerBtnSeparatorClassName;
   var _useState = useState([]),
-      sources = _useState[0],
-      setSources = _useState[1];
-
+    sources = _useState[0],
+    setSources = _useState[1];
   var _useState2 = useState([]),
-      menuItems = _useState2[0],
-      setMenuItems = _useState2[1];
-
+    menuItems = _useState2[0],
+    setMenuItems = _useState2[1];
   var listAudioDevices = useCallback(function () {
     try {
       return Promise.resolve(Room.getLocalDevices('audioinput', requestPermissions)).then(function (devices) {
@@ -142,17 +129,14 @@ var AudioSelectButton = function AudioSelectButton(_ref) {
       navigator.mediaDevices.removeEventListener('devicechange', listAudioDevices);
     };
   }, []);
-
   var handleMenuItem = function handleMenuItem(item) {
     var device = sources.find(function (d) {
       return d.label === item.label;
     });
-
     if (device && onSourceSelected) {
       onSourceSelected(device);
     }
   };
-
   return React__default.createElement(ControlButton, {
     label: isMuted ? unmuteText : muteText,
     icon: isMuted ? faMicrophoneSlash : faMicrophone,
@@ -169,28 +153,25 @@ var AudioSelectButton = function AudioSelectButton(_ref) {
 
 var VideoSelectButton = function VideoSelectButton(_ref) {
   var isEnabled = _ref.isEnabled,
-      onClick = _ref.onClick,
-      onSourceSelected = _ref.onSourceSelected,
-      _ref$disableText = _ref.disableText,
-      disableText = _ref$disableText === void 0 ? 'Disable Video' : _ref$disableText,
-      _ref$enableText = _ref.enableText,
-      enableText = _ref$enableText === void 0 ? 'Enable Video' : _ref$enableText,
-      _ref$requestPermissio = _ref.requestPermissions,
-      requestPermissions = _ref$requestPermissio === void 0 ? true : _ref$requestPermissio,
-      className = _ref.className,
-      isButtonDisabled = _ref.isButtonDisabled,
-      popoverContainerClassName = _ref.popoverContainerClassName,
-      popoverTriggerBtnClassName = _ref.popoverTriggerBtnClassName,
-      popoverTriggerBtnSeparatorClassName = _ref.popoverTriggerBtnSeparatorClassName;
-
+    onClick = _ref.onClick,
+    onSourceSelected = _ref.onSourceSelected,
+    _ref$disableText = _ref.disableText,
+    disableText = _ref$disableText === void 0 ? 'Disable Video' : _ref$disableText,
+    _ref$enableText = _ref.enableText,
+    enableText = _ref$enableText === void 0 ? 'Enable Video' : _ref$enableText,
+    _ref$requestPermissio = _ref.requestPermissions,
+    requestPermissions = _ref$requestPermissio === void 0 ? true : _ref$requestPermissio,
+    className = _ref.className,
+    isButtonDisabled = _ref.isButtonDisabled,
+    popoverContainerClassName = _ref.popoverContainerClassName,
+    popoverTriggerBtnClassName = _ref.popoverTriggerBtnClassName,
+    popoverTriggerBtnSeparatorClassName = _ref.popoverTriggerBtnSeparatorClassName;
   var _useState = useState([]),
-      sources = _useState[0],
-      setSources = _useState[1];
-
+    sources = _useState[0],
+    setSources = _useState[1];
   var _useState2 = useState([]),
-      menuItems = _useState2[0],
-      setMenuItems = _useState2[1];
-
+    menuItems = _useState2[0],
+    setMenuItems = _useState2[1];
   var listVideoDevices = useCallback(function () {
     try {
       return Promise.resolve(Room.getLocalDevices('videoinput', requestPermissions)).then(function (devices) {
@@ -212,17 +193,14 @@ var VideoSelectButton = function VideoSelectButton(_ref) {
       navigator.mediaDevices.removeEventListener('devicechange', listVideoDevices);
     };
   }, []);
-
   var handleMenuItem = function handleMenuItem(item) {
     var device = sources.find(function (d) {
       return d.label === item.label;
     });
-
     if (device && onSourceSelected) {
       onSourceSelected(device);
     }
   };
-
   return React__default.createElement(ControlButton, {
     label: isEnabled ? disableText : enableText,
     icon: isEnabled ? faVideo : faVideoSlash,
@@ -239,36 +217,28 @@ var VideoSelectButton = function VideoSelectButton(_ref) {
 
 var ControlsView = function ControlsView(_ref) {
   var room = _ref.room,
-      enableScreenShare = _ref.enableScreenShare,
-      enableAudio = _ref.enableAudio,
-      enableVideo = _ref.enableVideo,
-      onLeave = _ref.onLeave;
-
+    enableScreenShare = _ref.enableScreenShare,
+    enableAudio = _ref.enableAudio,
+    enableVideo = _ref.enableVideo,
+    onLeave = _ref.onLeave;
   var _useParticipant = useParticipant(room.localParticipant),
-      camPub = _useParticipant.cameraPublication,
-      micPub = _useParticipant.microphonePublication;
-
+    camPub = _useParticipant.cameraPublication,
+    micPub = _useParticipant.microphonePublication;
   if (enableScreenShare === undefined) {
     enableScreenShare = true;
   }
-
   if (enableVideo === undefined) {
     enableVideo = true;
   }
-
   if (enableAudio === undefined) {
     enableAudio = true;
   }
-
   var _React$useState = React__default.useState(false),
-      audioButtonDisabled = _React$useState[0],
-      setAudioButtonDisabled = _React$useState[1];
-
+    audioButtonDisabled = _React$useState[0],
+    setAudioButtonDisabled = _React$useState[1];
   var muteButton;
-
   if (enableAudio) {
     var _micPub$isMuted;
-
     var enabled = !((_micPub$isMuted = micPub === null || micPub === void 0 ? void 0 : micPub.isMuted) != null ? _micPub$isMuted : true);
     muteButton = React__default.createElement(AudioSelectButton, {
       isMuted: !enabled,
@@ -292,18 +262,13 @@ var ControlsView = function ControlsView(_ref) {
       }
     });
   }
-
   var _React$useState2 = React__default.useState(false),
-      videoButtonDisabled = _React$useState2[0],
-      setVideoButtonDisabled = _React$useState2[1];
-
+    videoButtonDisabled = _React$useState2[0],
+    setVideoButtonDisabled = _React$useState2[1];
   var videoButton;
-
   if (enableVideo) {
     var _camPub$isMuted;
-
     var _enabled = !((_camPub$isMuted = camPub === null || camPub === void 0 ? void 0 : camPub.isMuted) != null ? _camPub$isMuted : true);
-
     videoButton = React__default.createElement(VideoSelectButton, {
       isEnabled: _enabled,
       isButtonDisabled: videoButtonDisabled,
@@ -321,13 +286,10 @@ var ControlsView = function ControlsView(_ref) {
       }
     });
   }
-
   var _React$useState3 = React__default.useState(false),
-      screenButtonDisabled = _React$useState3[0],
-      setScreenButtonDisabled = _React$useState3[1];
-
+    screenButtonDisabled = _React$useState3[0],
+    setScreenButtonDisabled = _React$useState3[1];
   var screenButton;
-
   if (enableScreenShare) {
     var _enabled2 = room.localParticipant.isScreenShareEnabled;
     screenButton = React__default.createElement(ControlButton, {
@@ -342,7 +304,6 @@ var ControlsView = function ControlsView(_ref) {
       }
     });
   }
-
   return React__default.createElement("div", {
     className: styles.controlsWrapper
   }, muteButton, videoButton, screenButton, onLeave && React__default.createElement(ControlButton, {
@@ -361,25 +322,20 @@ var DisplayContext = React__default.createContext({
 });
 
 var _path, _path2;
-
 function _extends() {
-  _extends = Object.assign || function (target) {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends.apply(this, arguments);
 }
-
 function SvgConnectionQuality1(props) {
   return /*#__PURE__*/createElement("svg", _extends({
     width: 9,
@@ -396,25 +352,20 @@ function SvgConnectionQuality1(props) {
 }
 
 var _path$1, _path2$1;
-
 function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
+  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends$1.apply(this, arguments);
 }
-
 function SvgConnectionQuality2(props) {
   return /*#__PURE__*/createElement("svg", _extends$1({
     width: 9,
@@ -431,25 +382,20 @@ function SvgConnectionQuality2(props) {
 }
 
 var _path$2;
-
 function _extends$2() {
-  _extends$2 = Object.assign || function (target) {
+  _extends$2 = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends$2.apply(this, arguments);
 }
-
 function SvgConnectionQuality3(props) {
   return /*#__PURE__*/createElement("svg", _extends$2({
     width: 9,
@@ -464,34 +410,30 @@ function SvgConnectionQuality3(props) {
 
 var ParticipantView = function ParticipantView(_ref) {
   var participant = _ref.participant,
-      width = _ref.width,
-      height = _ref.height,
-      className = _ref.className,
-      speakerClassName = _ref.speakerClassName,
-      aspectWidth = _ref.aspectWidth,
-      aspectHeight = _ref.aspectHeight,
-      orientation = _ref.orientation,
-      displayName = _ref.displayName,
-      showOverlay = _ref.showOverlay,
-      showConnectionQuality = _ref.showConnectionQuality,
-      onMouseEnter = _ref.onMouseEnter,
-      onMouseLeave = _ref.onMouseLeave,
-      onClick = _ref.onClick;
-
+    width = _ref.width,
+    height = _ref.height,
+    className = _ref.className,
+    speakerClassName = _ref.speakerClassName,
+    aspectWidth = _ref.aspectWidth,
+    aspectHeight = _ref.aspectHeight,
+    orientation = _ref.orientation,
+    displayName = _ref.displayName,
+    showOverlay = _ref.showOverlay,
+    showConnectionQuality = _ref.showConnectionQuality,
+    onMouseEnter = _ref.onMouseEnter,
+    onMouseLeave = _ref.onMouseLeave,
+    onClick = _ref.onClick;
   var _useParticipant = useParticipant(participant),
-      cameraPublication = _useParticipant.cameraPublication,
-      isLocal = _useParticipant.isLocal,
-      connectionQuality = _useParticipant.connectionQuality,
-      isSpeaking = _useParticipant.isSpeaking;
-
+    cameraPublication = _useParticipant.cameraPublication,
+    isLocal = _useParticipant.isLocal,
+    connectionQuality = _useParticipant.connectionQuality,
+    isSpeaking = _useParticipant.isSpeaking;
   var _useState = useState(),
-      videoSize = _useState[0],
-      setVideoSize = _useState[1];
-
+    videoSize = _useState[0],
+    setVideoSize = _useState[1];
   var _useState2 = useState(),
-      currentBitrate = _useState2[0],
-      setCurrentBitrate = _useState2[1];
-
+    currentBitrate = _useState2[0],
+    setCurrentBitrate = _useState2[1];
   var context = useContext(DisplayContext);
   var handleResize = useCallback(function (width, height) {
     setVideoSize(width + "x" + height);
@@ -514,31 +456,24 @@ var ParticipantView = function ParticipantView(_ref) {
     width: width,
     height: height
   };
-  var objectFit = 'contain';
+  var objectFit = "contain";
   var videoOrientation;
-
   if (!orientation && aspectWidth && aspectHeight) {
-    orientation = aspectWidth > aspectHeight ? 'landscape' : 'portrait';
+    orientation = aspectWidth > aspectHeight ? "landscape" : "portrait";
   }
-
   if (cameraPublication !== null && cameraPublication !== void 0 && cameraPublication.dimensions) {
-    videoOrientation = cameraPublication.dimensions.width > cameraPublication.dimensions.height ? 'landscape' : 'portrait';
+    videoOrientation = cameraPublication.dimensions.width > cameraPublication.dimensions.height ? "landscape" : "portrait";
   }
-
   if (videoOrientation === orientation) {
-    objectFit = 'cover';
+    objectFit = "cover";
   }
-
   if (!displayName) {
     displayName = participant.name || participant.identity;
-
     if (isLocal) {
-      displayName += ' (You)';
+      displayName += " (You)";
     }
   }
-
   var mainElement;
-
   if (cameraPublication !== null && cameraPublication !== void 0 && cameraPublication.isSubscribed && cameraPublication !== null && cameraPublication !== void 0 && cameraPublication.track && !(cameraPublication !== null && cameraPublication !== void 0 && cameraPublication.isMuted)) {
     mainElement = React__default.createElement(VideoRenderer, {
       track: cameraPublication.track,
@@ -554,46 +489,36 @@ var ParticipantView = function ParticipantView(_ref) {
       className: styles.placeholder
     });
   }
-
   var classes = [styles.participant];
-
   if (className) {
     classes.push(className);
   }
-
   if (isSpeaking) {
     classes.push(speakerClassName != null ? speakerClassName : styles.speaker);
   }
-
   var isAudioMuted = !participant.isMicrophoneEnabled;
   var statsContent;
-
   if (context.showStats) {
     statsContent = React__default.createElement("div", {
       className: styles.stats
     }, React__default.createElement("span", null, videoSize), currentBitrate !== undefined && currentBitrate > 0 && React__default.createElement("span", null, "\xA0", Math.round(currentBitrate / 1024), " kbps"));
   }
-
   var ConnectionQualityIndicator;
-
   if (showConnectionQuality) {
     switch (connectionQuality) {
       case ConnectionQuality.Excellent:
         ConnectionQualityIndicator = SvgConnectionQuality3;
         break;
-
       case ConnectionQuality.Good:
         ConnectionQualityIndicator = SvgConnectionQuality2;
         break;
-
       case ConnectionQuality.Poor:
         ConnectionQualityIndicator = SvgConnectionQuality1;
         break;
     }
   }
-
   return React__default.createElement("div", {
-    className: classes.join(' '),
+    className: classes.join(" "),
     style: containerStyles,
     onMouseEnter: onMouseEnter,
     onMouseLeave: onMouseLeave,
@@ -615,8 +540,8 @@ var ParticipantView = function ParticipantView(_ref) {
 
 var ScreenShareView = function ScreenShareView(_ref) {
   var track = _ref.track,
-      width = _ref.width,
-      height = _ref.height;
+    width = _ref.width,
+    height = _ref.height;
   return React__default.createElement("div", {
     className: styles.screenShare
   }, React__default.createElement(VideoRenderer, {
@@ -636,19 +561,14 @@ function _unsupportedIterableToArray(o, minLen) {
   if (n === "Map" || n === "Set") return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
-
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
   return arr2;
 }
-
 function _createForOfIteratorHelperLoose(o, allowArrayLike) {
   var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
   if (it) return (it = it.call(o)).next.bind(it);
-
   if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
     if (it) o = it;
     var i = 0;
@@ -662,7 +582,6 @@ function _createForOfIteratorHelperLoose(o, allowArrayLike) {
       };
     };
   }
-
   throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
@@ -670,31 +589,25 @@ var styles$1 = {"container":"_2sm4e","stage":"_2VE66","stageCenter":"_2kKDi","si
 
 var GridStage = function GridStage(_ref) {
   var roomState = _ref.roomState,
-      participantRenderer = _ref.participantRenderer,
-      controlRenderer = _ref.controlRenderer,
-      onLeave = _ref.onLeave;
+    participantRenderer = _ref.participantRenderer,
+    controlRenderer = _ref.controlRenderer,
+    onLeave = _ref.onLeave;
   var isConnecting = roomState.isConnecting,
-      error = roomState.error,
-      participants = roomState.participants,
-      room = roomState.room;
-
+    error = roomState.error,
+    participants = roomState.participants,
+    room = roomState.room;
   var _useState = useState([]),
-      visibleParticipants = _useState[0],
-      setVisibleParticipants = _useState[1];
-
+    visibleParticipants = _useState[0],
+    setVisibleParticipants = _useState[1];
   var _useState2 = useState(false),
-      showOverlay = _useState2[0],
-      setShowOverlay = _useState2[1];
-
+    showOverlay = _useState2[0],
+    setShowOverlay = _useState2[1];
   var _React$useState = React__default.useState(styles$1.grid1x1),
-      gridClass = _React$useState[0],
-      setGridClass = _React$useState[1];
-
+    gridClass = _React$useState[0],
+    setGridClass = _React$useState[1];
   useEffect(function () {
     var _room$activeSpeakers;
-
     var numVisible = 1;
-
     if (participants.length === 1) {
       setGridClass(styles$1.grid1x1);
     } else if (participants.length === 2) {
@@ -713,7 +626,6 @@ var GridStage = function GridStage(_ref) {
       setGridClass(styles$1.grid5x5);
       numVisible = Math.min(participants.length, 25);
     }
-
     var newParticipants = [];
     visibleParticipants.forEach(function (p) {
       if (room !== null && room !== void 0 && room.participants.has(p.sid) || (room === null || room === void 0 ? void 0 : room.localParticipant.sid) === p.sid) {
@@ -724,55 +636,42 @@ var GridStage = function GridStage(_ref) {
       if (newParticipants.includes(speaker) || speaker !== (room === null || room === void 0 ? void 0 : room.localParticipant) && !(room !== null && room !== void 0 && room.participants.has(speaker.sid))) {
         return;
       }
-
       var idx = newParticipants.findIndex(function (p) {
         return !p.isSpeaking;
       });
-
       if (idx >= 0) {
         newParticipants[idx] = speaker;
       } else {
         newParticipants.push(speaker);
       }
     });
-
     for (var _iterator = _createForOfIteratorHelperLoose(participants), _step; !(_step = _iterator()).done;) {
       var p = _step.value;
-
       if (newParticipants.length >= numVisible) {
         break;
       }
-
       if (newParticipants.includes(p) || p.isSpeaking) {
         continue;
       }
-
       newParticipants.push(p);
     }
-
     if (newParticipants.length > numVisible) {
       newParticipants.splice(numVisible, newParticipants.length - numVisible);
     }
-
     setVisibleParticipants(newParticipants);
   }, [participants]);
-
   if (error) {
     return React__default.createElement("div", null, "error ", error.message);
   }
-
   if (isConnecting) {
     return React__default.createElement("div", null, "connecting");
   }
-
   if (!room) {
     return React__default.createElement("div", null, "room closed");
   }
-
   if (participants.length === 0) {
     return React__default.createElement("div", null, "no one is in the room");
   }
-
   var ParticipantRenderer = participantRenderer != null ? participantRenderer : ParticipantView;
   var ControlRenderer = controlRenderer != null ? controlRenderer : ControlsView;
   return React__default.createElement("div", {
@@ -807,11 +706,9 @@ function defaultSortParticipants(participants) {
   var sortedParticipants = [].concat(participants);
   sortedParticipants.sort(function (a, b) {
     var _a$joinedAt$getTime, _a$joinedAt, _b$joinedAt$getTime, _b$joinedAt;
-
     if (a.isSpeaking && b.isSpeaking) {
       return b.audioLevel - a.audioLevel;
     }
-
     if (a.isSpeaking !== b.isSpeaking) {
       if (a.isSpeaking) {
         return -1;
@@ -819,18 +716,14 @@ function defaultSortParticipants(participants) {
         return 1;
       }
     }
-
     if (a.lastSpokeAt !== b.lastSpokeAt) {
       var _a$lastSpokeAt$getTim, _a$lastSpokeAt, _b$lastSpokeAt$getTim, _b$lastSpokeAt;
-
       var aLast = (_a$lastSpokeAt$getTim = (_a$lastSpokeAt = a.lastSpokeAt) === null || _a$lastSpokeAt === void 0 ? void 0 : _a$lastSpokeAt.getTime()) != null ? _a$lastSpokeAt$getTim : 0;
       var bLast = (_b$lastSpokeAt$getTim = (_b$lastSpokeAt = b.lastSpokeAt) === null || _b$lastSpokeAt === void 0 ? void 0 : _b$lastSpokeAt.getTime()) != null ? _b$lastSpokeAt$getTim : 0;
       return bLast - aLast;
     }
-
     var aVideo = a.videoTracks.size > 0;
     var bVideo = b.videoTracks.size > 0;
-
     if (aVideo !== bVideo) {
       if (aVideo) {
         return -1;
@@ -838,19 +731,15 @@ function defaultSortParticipants(participants) {
         return 1;
       }
     }
-
     return ((_a$joinedAt$getTime = (_a$joinedAt = a.joinedAt) === null || _a$joinedAt === void 0 ? void 0 : _a$joinedAt.getTime()) != null ? _a$joinedAt$getTime : 0) - ((_b$joinedAt$getTime = (_b$joinedAt = b.joinedAt) === null || _b$joinedAt === void 0 ? void 0 : _b$joinedAt.getTime()) != null ? _b$joinedAt$getTime : 0);
   });
   var localParticipant = sortedParticipants.find(function (p) {
     return p instanceof LocalParticipant;
   });
-
   if (localParticipant) {
     var localIdx = sortedParticipants.indexOf(localParticipant);
-
     if (localIdx >= 0) {
       sortedParticipants.splice(localIdx, 1);
-
       if (sortedParticipants.length > 0) {
         sortedParticipants.splice(1, 0, localParticipant);
       } else {
@@ -858,51 +747,41 @@ function defaultSortParticipants(participants) {
       }
     }
   }
-
   return sortedParticipants;
 }
 
 var SpeakerStage = function SpeakerStage(_ref) {
   var roomState = _ref.roomState,
-      participantRenderer = _ref.participantRenderer,
-      controlRenderer = _ref.controlRenderer,
-      onLeave = _ref.onLeave,
-      sortParticipants = _ref.sortParticipants;
+    participantRenderer = _ref.participantRenderer,
+    controlRenderer = _ref.controlRenderer,
+    onLeave = _ref.onLeave,
+    sortParticipants = _ref.sortParticipants;
   var isConnecting = roomState.isConnecting,
-      error = roomState.error,
-      participants = roomState.participants,
-      room = roomState.room;
-
+    error = roomState.error,
+    participants = roomState.participants,
+    room = roomState.room;
   var _useState = useState(false),
-      showOverlay = _useState[0],
-      setShowOverlay = _useState[1];
-
+    showOverlay = _useState[0],
+    setShowOverlay = _useState[1];
   var sortFn = sortParticipants != null ? sortParticipants : defaultSortParticipants;
-
   var _useState2 = useState(sortFn(participants)),
-      sortedParticipants = _useState2[0],
-      setSortedParticipants = _useState2[1];
-
+    sortedParticipants = _useState2[0],
+    setSortedParticipants = _useState2[1];
   useEffect(function () {
     setSortedParticipants(sortFn(participants));
   }, [participants, sortFn]);
-
   if (error) {
     return React__default.createElement("div", null, "error ", error.message);
   }
-
   if (isConnecting) {
     return React__default.createElement("div", null, "connecting");
   }
-
   if (!room) {
     return React__default.createElement("div", null, "room closed");
   }
-
   if (sortedParticipants.length === 0) {
     return React__default.createElement("div", null, "no one is in the room");
   }
-
   var ParticipantRenderer = participantRenderer != null ? participantRenderer : ParticipantView;
   var ControlRenderer = controlRenderer != null ? controlRenderer : ControlsView;
   var screenTrack;
@@ -910,9 +789,7 @@ var SpeakerStage = function SpeakerStage(_ref) {
     if (screenTrack) {
       return;
     }
-
     var track = p.getTrack(Track.Source.ScreenShare);
-
     if (track !== null && track !== void 0 && track.isSubscribed && track.videoTrack) {
       screenTrack = track.videoTrack;
     }
@@ -920,7 +797,6 @@ var SpeakerStage = function SpeakerStage(_ref) {
   var otherParticipants = sortedParticipants;
   var participantInFocus;
   var mainView;
-
   if (screenTrack) {
     mainView = React__default.createElement(ScreenShareView, {
       track: screenTrack,
@@ -946,7 +822,6 @@ var SpeakerStage = function SpeakerStage(_ref) {
       }
     });
   }
-
   return React__default.createElement("div", {
     className: styles$1.container
   }, React__default.createElement("div", {
@@ -982,45 +857,36 @@ var styles$2 = {"container":"_2zM8F","stage":"_9PXrI","participantsArea":"_Tl5ht
 
 var MobileStage = function MobileStage(_ref) {
   var roomState = _ref.roomState,
-      participantRenderer = _ref.participantRenderer,
-      controlRenderer = _ref.controlRenderer,
-      onLeave = _ref.onLeave,
-      sortParticipants = _ref.sortParticipants;
+    participantRenderer = _ref.participantRenderer,
+    controlRenderer = _ref.controlRenderer,
+    onLeave = _ref.onLeave,
+    sortParticipants = _ref.sortParticipants;
   var isConnecting = roomState.isConnecting,
-      error = roomState.error,
-      participants = roomState.participants,
-      room = roomState.room;
-
+    error = roomState.error,
+    participants = roomState.participants,
+    room = roomState.room;
   var _useState = useState(false),
-      showOverlay = _useState[0],
-      setShowOverlay = _useState[1];
-
+    showOverlay = _useState[0],
+    setShowOverlay = _useState[1];
   var sortFn = sortParticipants != null ? sortParticipants : defaultSortParticipants;
-
   var _useState2 = useState(sortFn(participants)),
-      sortedParticipants = _useState2[0],
-      setSortedParticipants = _useState2[1];
-
+    sortedParticipants = _useState2[0],
+    setSortedParticipants = _useState2[1];
   useEffect(function () {
     setSortedParticipants(sortFn(participants));
   }, [participants, sortFn]);
-
   if (error) {
     return React__default.createElement("div", null, "error ", error.message);
   }
-
   if (isConnecting) {
     return React__default.createElement("div", null, "connecting");
   }
-
   if (!room) {
     return React__default.createElement("div", null, "room closed");
   }
-
   if (sortedParticipants.length === 0) {
     return React__default.createElement("div", null, "no one is in the room");
   }
-
   var ParticipantRenderer = participantRenderer != null ? participantRenderer : ParticipantView;
   var ControlRenderer = controlRenderer != null ? controlRenderer : ControlsView;
   var screenTrack;
@@ -1028,9 +894,7 @@ var MobileStage = function MobileStage(_ref) {
     if (screenTrack) {
       return;
     }
-
     var track = p.getTrack(Track.Source.ScreenShare);
-
     if (track !== null && track !== void 0 && track.isSubscribed && track.videoTrack) {
       screenTrack = track.videoTrack;
     }
@@ -1038,7 +902,6 @@ var MobileStage = function MobileStage(_ref) {
   var otherParticipants = sortedParticipants;
   var participantInFocus;
   var mainView;
-
   if (screenTrack) {
     mainView = React__default.createElement(ScreenShareView, {
       track: screenTrack,
@@ -1067,7 +930,6 @@ var MobileStage = function MobileStage(_ref) {
       }
     });
   }
-
   return React__default.createElement("div", {
     className: styles$2.container
   }, React__default.createElement("div", {
@@ -1103,11 +965,10 @@ var StageView = function StageView(stageProps) {
     query: '(max-width: 800px)'
   });
   var _stageProps$roomState = stageProps.roomState,
-      room = _stageProps$roomState.room,
-      participants = _stageProps$roomState.participants;
+    room = _stageProps$roomState.room,
+    participants = _stageProps$roomState.participants;
   var context = useContext(DisplayContext);
   var mainElement;
-
   if (isMobile) {
     mainElement = React__default.createElement(MobileStage, Object.assign({}, stageProps));
   } else {
@@ -1116,21 +977,17 @@ var StageView = function StageView(stageProps) {
       if (screenTrack) {
         return;
       }
-
       var track = p.getTrack(Track.Source.ScreenShare);
-
       if (track !== null && track !== void 0 && track.isSubscribed && track.videoTrack) {
         screenTrack = track.videoTrack;
       }
     });
-
     if (context.stageLayout === 'grid' && screenTrack === undefined) {
       mainElement = React__default.createElement(GridStage, Object.assign({}, stageProps));
     } else {
       mainElement = React__default.createElement(SpeakerStage, Object.assign({}, stageProps));
     }
   }
-
   return React__default.createElement("div", {
     className: styles.container
   }, mainElement, stageProps.roomState.audioTracks.map(function (track) {
@@ -1155,14 +1012,14 @@ var StageView = function StageView(stageProps) {
 
 var LiveKitRoom = function LiveKitRoom(_ref) {
   var url = _ref.url,
-      token = _ref.token,
-      roomOptions = _ref.roomOptions,
-      connectOptions = _ref.connectOptions,
-      stageRenderer = _ref.stageRenderer,
-      participantRenderer = _ref.participantRenderer,
-      controlRenderer = _ref.controlRenderer,
-      onConnected = _ref.onConnected,
-      onLeave = _ref.onLeave;
+    token = _ref.token,
+    roomOptions = _ref.roomOptions,
+    connectOptions = _ref.connectOptions,
+    stageRenderer = _ref.stageRenderer,
+    participantRenderer = _ref.participantRenderer,
+    controlRenderer = _ref.controlRenderer,
+    onConnected = _ref.onConnected,
+    onLeave = _ref.onLeave;
   var roomState = useRoom(roomOptions);
   useEffect(function () {
     if (roomState.room) {
@@ -1170,19 +1027,15 @@ var LiveKitRoom = function LiveKitRoom(_ref) {
         if (!room) {
           return;
         }
-
         if (onConnected && room.state === ConnectionState.Connected) {
           onConnected(room);
         }
       });
     }
-
     return function () {
       var _roomState$room;
-
       if (((_roomState$room = roomState.room) === null || _roomState$room === void 0 ? void 0 : _roomState$room.state) !== ConnectionState.Disconnected) {
         var _roomState$room2;
-
         (_roomState$room2 = roomState.room) === null || _roomState$room2 === void 0 ? void 0 : _roomState$room2.disconnect();
       }
     };
