@@ -1,1 +1,0 @@
-{"version":3,"file":"useRemoteParticipant.d.ts","sourceRoot":"","sources":["../../src/hooks/useRemoteParticipant.ts"],"names":[],"mappings":"AACA,OAAO,KAAK,EAAE,gBAAgB,EAAE,iBAAiB,EAAE,MAAM,gBAAgB,CAAC;AAK1E,cAAc;AACd,MAAM,WAAW,2BAA2B;IAC1C,YAAY,CAAC,EAAE,gBAAgB,EAAE,CAAC;CACnC;AAED,cAAc;AACd,eAAO,MAAM,oBAAoB,aACrB,MAAM,YACP,2BAA2B,KACnC,iBAAiB,GAAG,SAatB,CAAC"}

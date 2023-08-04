@@ -1,1 +1,0 @@
-{"version":3,"file":"PaginationIndicator.d.ts","sourceRoot":"","sources":["../../../src/components/controls/PaginationIndicator.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAE/B,MAAM,MAAM,wBAAwB,GAAG;IACrC,cAAc,EAAE,MAAM,CAAC;IACvB,WAAW,EAAE,MAAM,CAAC;CACrB,CAAC;AAEF,wBAAgB,mBAAmB,CAAC,EAAE,cAAc,EAAE,WAAW,EAAE,EAAE,wBAAwB,qBAU5F"}
