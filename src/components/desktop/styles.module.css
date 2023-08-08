@@ -45,11 +45,13 @@
 .grid1x1 {
   grid-template-columns: auto;
   grid-template-rows: auto;
+  /* margin-top: 100px; */
 }
 
 .grid2x1 {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
+  /* margin-top: 100px; */
 }
 
 .grid2x2 {

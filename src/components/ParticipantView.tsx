@@ -144,7 +144,46 @@ export const ParticipantView = ({
       />
     );
   } else {
-    mainElement = <div className={styles.placeholder} />;
+    mainElement = (
+      <div>
+        <div style={{backgroundColor: "black", borderRadius:"8px"}} 
+        // className={styles.placeholder}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                border: "2px solid teal",
+                borderRadius: "8px",
+                width: "500px",
+                height: "300px",
+              }}
+            >
+              <span style={{
+                  background: `linear-gradient(62deg, #13547a 0%, #80d0c7 100%)`,
+                  height:"150px",
+                  width:"150px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "50%",
+                  fontSize: "64px",
+                }}
+              >
+                {participant.identity?.charAt(0).toUpperCase()}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const classes = [styles.participant];
@@ -200,8 +239,8 @@ export const ParticipantView = ({
       {(!aspectWidth || !aspectHeight) && mainElement}
 
       {(showOverlay || context.showStats) && (
-        <div className={styles.participantBar}>
-          <div className={styles.name}>{displayName}</div>
+        <div className={styles.participantBar} style={{display:"none"}}>
+          {/* <div className={styles.name}>{displayName}</div> */}
           <div className={styles.center}>{statsContent}</div>
           <div>
             {ConnectionQualityIndicator && <ConnectionQualityIndicator />}

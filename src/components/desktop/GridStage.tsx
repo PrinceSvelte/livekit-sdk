@@ -17,6 +17,7 @@ export const GridStage = ({
   );
   const [showOverlay, setShowOverlay] = useState(false);
   const [gridClass, setGridClass] = React.useState(styles.grid1x1);
+  console.log(visibleParticipants);
 
   // compute visible participants and sort.
   useEffect(() => {
@@ -92,7 +93,7 @@ export const GridStage = ({
   }
 
   if (isConnecting) {
-    return <div>connecting prince</div>;
+    return <div>connecting prince 12</div>;
   }
   if (!room) {
     return <div>room closed</div>;

@@ -15,5 +15,5 @@ interface ButtonProps {
     menuItems?: MenuItem[];
     onMenuItemClick?: (item: MenuItem) => void;
 }
-export declare const ControlButton: ({ label, disabled, onClick, icon, className, menuItems, popoverContainerClassName, popoverTriggerBtnClassName, popoverTriggerBtnSeparatorClassName, onMenuItemClick, }: ButtonProps) => React.JSX.Element;
+export declare const ControlButton: ({ disabled, onClick, icon, className, menuItems, popoverContainerClassName, popoverTriggerBtnClassName, popoverTriggerBtnSeparatorClassName, onMenuItemClick, }: ButtonProps) => React.JSX.Element;
 export {};
