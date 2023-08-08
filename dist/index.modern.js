@@ -1,4 +1,4 @@
-import { faChevronDown, faMicrophoneSlash, faMicrophone, faVideo, faVideoSlash, faStop, faDesktop, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faPhone, faMicrophoneSlash, faMicrophone, faVideo, faVideoSlash, faStop, faDesktop, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 import { Room, LocalTrack, RemoteTrack, ConnectionQuality, LocalParticipant, Track, ConnectionState } from 'livekit-client';
 import React__default, { useState, useCallback, useEffect, createElement, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,8 +11,7 @@ import { useMediaQuery } from 'react-responsive';
 var styles = {"video":"_2WNzJ","participant":"_34YL4","speaker":"_1y2fW","placeholder":"_30KSQ","participantBar":"_2LCHl","name":"_55u8f","center":"_213aF","stats":"_te685","screenShare":"_1FIqv","iconRed":"_3LzZj","controlsWrapper":"_2kKks","buttonWrapper":"_3w3nM","button":"_hRq5k","icon":"_1Nxni","dangerButton":"_Rt0RH","dropdown":"_3Lz0y","hasDropdown":"_3Bgvz","separator":"_1VLMM","popoverMenu":"_3XXS4","list":"_dKNN7","container":"_14898","overlay":"_17KXW","unmuteButton":"_3QhLc"};
 
 var ControlButton = function ControlButton(_ref) {
-  var label = _ref.label,
-    disabled = _ref.disabled,
+  var disabled = _ref.disabled,
     _onClick = _ref.onClick,
     icon = _ref.icon,
     className = _ref.className,
@@ -69,12 +68,24 @@ var ControlButton = function ControlButton(_ref) {
     onClick: function onClick() {
       setMenuVisible(false);
       if (_onClick) _onClick();
+    },
+    style: {
+      borderRadius: "100%",
+      width: "70px",
+      height: "70px",
+      backgroundColor: icon ? "black" : "#D10000"
     }
-  }, icon && React__default.createElement(FontAwesomeIcon, {
+  }, icon ? React__default.createElement(FontAwesomeIcon, {
     className: styles.icon,
     height: 32,
     icon: icon
-  }), label);
+  }) : React__default.createElement(FontAwesomeIcon, {
+    icon: faPhone,
+    style: {
+      color: "#ffffff",
+      transform: "rotate(135deg)"
+    }
+  }));
   if (!menuTrigger) {
     return mainContent;
   }
@@ -84,7 +95,7 @@ var ControlButton = function ControlButton(_ref) {
     content: menu
   }, React__default.createElement("div", {
     className: styles.buttonWrapper
-  }, mainContent, menuTrigger));
+  }, mainContent));
 };
 
 var AudioSelectButton = function AudioSelectButton(_ref) {
@@ -417,7 +428,6 @@ var ParticipantView = function ParticipantView(_ref) {
     aspectWidth = _ref.aspectWidth,
     aspectHeight = _ref.aspectHeight,
     orientation = _ref.orientation,
-    displayName = _ref.displayName,
     showOverlay = _ref.showOverlay,
     showConnectionQuality = _ref.showConnectionQuality,
     onMouseEnter = _ref.onMouseEnter,
@@ -467,12 +477,6 @@ var ParticipantView = function ParticipantView(_ref) {
   if (videoOrientation === orientation) {
     objectFit = "cover";
   }
-  if (!displayName) {
-    displayName = participant.name || participant.identity;
-    if (isLocal) {
-      displayName += " (You)";
-    }
-  }
   var mainElement;
   if (cameraPublication !== null && cameraPublication !== void 0 && cameraPublication.isSubscribed && cameraPublication !== null && cameraPublication !== void 0 && cameraPublication.track && !(cameraPublication !== null && cameraPublication !== void 0 && cameraPublication.isMuted)) {
     mainElement = React__default.createElement(VideoRenderer, {
@@ -485,9 +489,39 @@ var ParticipantView = function ParticipantView(_ref) {
       onSizeChanged: handleResize
     });
   } else {
-    mainElement = React__default.createElement("div", {
-      className: styles.placeholder
-    });
+    var _participant$identity;
+    mainElement = React__default.createElement("div", null, React__default.createElement("div", {
+      style: {
+        backgroundColor: "#2f2f2f",
+        borderRadius: "8px"
+      }
+    }, React__default.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "center"
+      }
+    }, React__default.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        border: "2px solid teal",
+        borderRadius: "8px",
+        width: "500px",
+        height: "300px"
+      }
+    }, React__default.createElement("span", {
+      style: {
+        background: "linear-gradient(62deg, #13547a 0%, #80d0c7 100%)",
+        height: "150px",
+        width: "150px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: "50%",
+        fontSize: "64px"
+      }
+    }, (_participant$identity = participant.identity) === null || _participant$identity === void 0 ? void 0 : _participant$identity.charAt(0).toUpperCase())))));
   }
   var classes = [styles.participant];
   if (className) {
@@ -526,10 +560,11 @@ var ParticipantView = function ParticipantView(_ref) {
   }, aspectWidth && aspectHeight && React__default.createElement(AspectRatio, {
     ratio: aspectWidth / aspectHeight
   }, mainElement), (!aspectWidth || !aspectHeight) && mainElement, (showOverlay || context.showStats) && React__default.createElement("div", {
-    className: styles.participantBar
+    className: styles.participantBar,
+    style: {
+      display: "none"
+    }
   }, React__default.createElement("div", {
-    className: styles.name
-  }, displayName), React__default.createElement("div", {
     className: styles.center
   }, statsContent), React__default.createElement("div", null, ConnectionQualityIndicator && React__default.createElement(ConnectionQualityIndicator, null)), React__default.createElement("div", null, React__default.createElement(FontAwesomeIcon, {
     icon: isAudioMuted ? faMicrophoneSlash : faMicrophone,
@@ -605,6 +640,7 @@ var GridStage = function GridStage(_ref) {
   var _React$useState = React__default.useState(styles$1.grid1x1),
     gridClass = _React$useState[0],
     setGridClass = _React$useState[1];
+  console.log(visibleParticipants);
   useEffect(function () {
     var _room$activeSpeakers;
     var numVisible = 1;
@@ -664,7 +700,7 @@ var GridStage = function GridStage(_ref) {
     return React__default.createElement("div", null, "error ", error.message);
   }
   if (isConnecting) {
-    return React__default.createElement("div", null, "connecting prince");
+    return React__default.createElement("div", null, "connecting prince 12");
   }
   if (!room) {
     return React__default.createElement("div", null, "room closed");

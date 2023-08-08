@@ -1,4 +1,4 @@
-import { faChevronDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faPhone, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactElement, useState } from 'react';
 import { Popover } from 'react-tiny-popover';
@@ -21,7 +21,7 @@ interface ButtonProps {
 }
 
 export const ControlButton = ({
-  label,
+  // label,
   disabled,
   onClick,
   icon,
@@ -84,9 +84,18 @@ export const ControlButton = ({
         setMenuVisible(false);
         if (onClick) onClick();
       }}
+      style={{
+        borderRadius: "100%",
+        width: "70px",
+        height: "70px",
+        backgroundColor:icon ? "black" :"#D10000"
+        // justifyContent: "center",
+        // alignItems: "center",
+      }}
     >
-      {icon && <FontAwesomeIcon className={styles.icon} height={32} icon={icon} />}
-      {label}
+      {icon ? <FontAwesomeIcon className={styles.icon} height={32} icon={icon} /> : <FontAwesomeIcon icon={faPhone} style={{color:"#ffffff", transform: "rotate(135deg)"}} />}
+      {/* {!icon && <FontAwesomeIcon icon={faPhone} style={{color: "#ffffff"}} />} */}
+      {/* {label} */}
     </button>
   );
 
@@ -98,7 +107,7 @@ export const ControlButton = ({
     <Popover isOpen={menuVisible} positions={['top']} content={menu}>
       <div className={styles.buttonWrapper}>
         {mainContent}
-        {menuTrigger}
+        {/* {menuTrigger} */}
       </div>
     </Popover>
   );
