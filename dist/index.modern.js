@@ -492,7 +492,7 @@ var ParticipantView = function ParticipantView(_ref) {
     var _participant$identity;
     mainElement = React__default.createElement("div", null, React__default.createElement("div", {
       style: {
-        backgroundColor: "black",
+        backgroundColor: "#2f2f2f",
         borderRadius: "8px"
       }
     }, React__default.createElement("div", {

@@ -146,7 +146,7 @@ export const ParticipantView = ({
   } else {
     mainElement = (
       <div>
-        <div style={{backgroundColor: "black", borderRadius:"8px"}} 
+        <div style={{backgroundColor: "#2f2f2f", borderRadius:"8px"}} 
         // className={styles.placeholder}
         >
           <div
